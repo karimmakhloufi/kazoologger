@@ -1,6 +1,6 @@
 {
   "name": "kazoologger",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "A simple server logging package",
   "main": "index.js",
   "scripts": {

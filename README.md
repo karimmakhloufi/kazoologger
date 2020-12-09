@@ -1,6 +1,8 @@
 # kazoolog
 
-Easy logging for your js code (node, react, react-native, whatever)
+Easy logging (5 min setup) for your js code (node, react, react-native, whatever)
+
+Send your logs to our (or your server) and view them online https://kazoolog.netlify.app/secret
 
 ![alt text](https://i.imgur.com/bizIIRa.png)
 
@@ -8,7 +10,7 @@ Easy logging for your js code (node, react, react-native, whatever)
 
 Generate a new APIKEY here: https://www.uuidtools.com/
 
-install the npm module:
+Install the npm module:
 
 ```
 npm install kazoologger
@@ -26,7 +28,7 @@ After importing the function, export the new instance with your API KEY:
 export const kazooLog = kazooLoggerCreator({ APIKEY: "secret" });
 ```
 
-You can also specify an userId to distinguish your differnt clients, for example the expo installation id: https://docs.expo.io/versions/latest/sdk/constants/#constantsinstallationid
+You can also specify an userId to distinguish your different clients, for example the expo installation id: https://docs.expo.io/versions/latest/sdk/constants/#constantsinstallationid
 
 ```
 export const kazooLog = kazooLoggerCreator({
@@ -35,20 +37,44 @@ export const kazooLog = kazooLoggerCreator({
 });
 ```
 
-If you don't specify anything, a uuid will be generated be I suggest you to generate it yourself and store it in localstorage:
+If you don't specify anything, a uuid will be generated but I suggest you to generate it yourself and store it in localstorage, if you dont do it, a new uuid will be generated on each refresh.
+Here is an example on how to generate and store an uuid in localstorage:
+
+```
+let userId = localStorage.getItem("kazoologId");
+console.log(userId);
+if (userId === null) {
+  userId = uuidv4();
+  localStorage.setItem("kazoologId", userId);
+}
+
+export const kazooLog = kazooLoggerCreator({
+  APIKEY: "secret",
+  userId: userId,
+});
+
+```
 
 This is how the index.js of your React app could look like:
 
 ```
 import React from "react";
 import ReactDOM from "react-dom";
+import { v4 as uuidv4 } from "uuid";
+import localStorage from "localStorage";
+import { kazooLoggerCreator } from "kazoologger";
 import App from "./App";
 
-import { kazooLoggerCreator } from "kazoologger";
+let userId = localStorage.getItem("kazoologId");
+console.log(userId);
+if (userId === null) {
+  userId = uuidv4();
+  localStorage.setItem("kazoologId", userId);
+}
 
 export const kazooLog = kazooLoggerCreator({
   APIKEY: "secret",
-  userId: "userId",
+  userId: userId,
 });
 
 ReactDOM.render(
@@ -59,7 +85,8 @@ ReactDOM.render(
 );
 ```
 
-Now you have to import the function where you want to log things and use it instead of console.log, for example this is a react component:
+Now you have to import the function where you want to log things and use it instead of console.log.
+For example this is a React component using the kazooLog function:
 
 ```
 import { kazooLog } from "./index";

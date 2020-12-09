@@ -2,13 +2,13 @@
 
 Easy logging (5 min setup) for your js code (node, react, react-native, whatever)
 
-Send your logs to our (or your server) and view them online https://kazoolog.netlify.app/secret
+Send your logs to our (or your server) and view them online https://kazoolog.netlify.app/logs/be682c8d-8f71-4695-b518-e81aaa6be846
 
 ![alt text](https://i.imgur.com/bizIIRa.png)
 
 ## How to use
 
-Generate a new APIKEY here: https://www.uuidtools.com/
+Generate and copy in a textfile somewhere your api key and your secret url: https://kazoolog.netlify.app/newkeys
 
 Install the npm module:
 
@@ -22,17 +22,17 @@ Import the function in your application, for example in the index.js file of you
 import { kazooLoggerCreator } from "kazoologger";
 ```
 
-After importing the function, export the new instance with your API KEY:
+After importing the function, export the new instance with your previously generated and saved API KEY:
 
 ```
-export const kazooLog = kazooLoggerCreator({ APIKEY: "secret" });
+export const kazooLog = kazooLoggerCreator({ APIKEY: "YOURAPIKEY" });
 ```
 
 You can also specify an userId to distinguish your different clients, for example the expo installation id: https://docs.expo.io/versions/latest/sdk/constants/#constantsinstallationid
 
 ```
 export const kazooLog = kazooLoggerCreator({
-  APIKEY: "secret",
+  APIKEY: "YOURAPIKEY",
   userId: "EXPO INSTALLATION ID",
 });
 ```
@@ -49,7 +49,7 @@ if (userId === null) {
 }
 
 export const kazooLog = kazooLoggerCreator({
-  APIKEY: "secret",
+  APIKEY: "YOURAPIKEY",
   userId: userId,
 });
 
@@ -73,7 +73,7 @@ if (userId === null) {
 }
 
 export const kazooLog = kazooLoggerCreator({
-  APIKEY: "secret",
+  APIKEY: "YOURAPIKEY",
   userId: userId,
 });
 

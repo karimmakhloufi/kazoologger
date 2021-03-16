@@ -61,7 +61,6 @@ This is how the index.js of your React app could look like:
 import React from "react";
 import ReactDOM from "react-dom";
 import { v4 as uuidv4 } from "uuid";
-import localStorage from "localStorage";
 import { kazooLoggerCreator } from "kazoologger";
 import App from "./App";
 
